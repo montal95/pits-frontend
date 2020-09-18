@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import { checkToken } from "../helpers/index";
 
-class PlantEdit extends Component {
+class Dashboard extends Component {
   componentDidMount() {
     checkToken(this.props);
   }
-
   render() {
     return (
       <div>
-        <h1>Plant Edit Page</h1>
+        <h1>Dashboard Page</h1>
       </div>
     );
   }
 }
 
-export default PlantEdit;
+export default Dashboard;
