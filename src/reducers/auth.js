@@ -1,4 +1,4 @@
-export default function auth(state = null, action) {
+export function authReducer(state = {}, action) {
   switch (action.type) {
     case "LOGIN_SUCCESS":
     case "CURRENT_USER":
