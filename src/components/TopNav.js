@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navbar } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import LoggedInButtons from "../components/LoggedInButtons";
 import LoggedOutButtons from "../components/LoggedOutButtons";
+import { checkToken } from "../api/auth";
+import { currentUser } from "../actions/auth";
+import { connect } from "react-redux";
 
-const TopNav = () => {
-  const token = localStorage.getItem("pitsToken");
+const TopNav = (props) => {
+  const token = JSON.parse(localStorage.getItem("state")).auth.token;
   const location = useLocation();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (token) {
+      checkToken(token, history, props.currentUser);
+    }
+  });
 
   return (
     <Navbar bg="light" expand="lg">
@@ -23,4 +33,8 @@ const TopNav = () => {
   );
 };
 
-export default TopNav;
+const mapDispatchToProps = {
+  currentUser,
+};
+
+export default connect(null, mapDispatchToProps)(TopNav);

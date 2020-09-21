@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { userAuth } from "../api/auth";
+import { loginSuccess } from "../actions/auth";
+import { connect } from "react-redux";
 
-const Login = () => {
+const Login = (props) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -12,7 +14,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = { email: email, password: password };
-    const result = await userAuth(formData);
+    const result = await userAuth(formData, props.loginSuccess);
     if (result === "success") {
       history.push("/dashboard");
     } else {
@@ -60,4 +62,6 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapDispatchToProps = { loginSuccess };
+
+export default connect(null, mapDispatchToProps)(Login);

@@ -5,7 +5,7 @@ export function authReducer(state = {}, action) {
     case "SIGNUP_SUCCESS":
       return action.user;
     case "LOGOUT_SUCCESS":
-      return null;
+      return {};
     default:
       return state;
   }
