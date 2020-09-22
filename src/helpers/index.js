@@ -1,6 +1,5 @@
-export const checkToken = (props) => {
-  const { history } = props;
-  const token = JSON.parse(localStorage.getItem("state")).auth.token;
+export const checkToken = (props, history) => {
+  const token = JSON.parse(localStorage.getItem("state"));
   if (!token) {
     history.push("/login");
   }

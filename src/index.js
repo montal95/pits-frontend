@@ -22,6 +22,7 @@ store.subscribe(
   throttle(() => {
     saveState({
       auth: store.getState().auth,
+      plants: store.getState().plants,
     });
   }, 1000)
 );

@@ -8,7 +8,7 @@ import { currentUser } from "../actions/auth";
 import { connect } from "react-redux";
 
 const TopNav = (props) => {
-  const token = JSON.parse(localStorage.getItem("state")).auth.token;
+  const token = JSON.parse(localStorage.getItem("state"));
   const location = useLocation();
   const history = useHistory();
 

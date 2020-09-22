@@ -15,10 +15,10 @@ const Login = (props) => {
     e.preventDefault();
     const formData = { email: email, password: password };
     const result = await userAuth(formData, props.loginSuccess);
-    if (result === "success") {
+    if (!result.error) {
       history.push("/dashboard");
     } else {
-      setError(result);
+      setError(result.error);
     }
   };
 
