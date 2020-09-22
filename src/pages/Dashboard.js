@@ -5,16 +5,13 @@ import { connect } from "react-redux";
 import { CardGroup } from "react-bootstrap";
 import PlantCard from "../components/PlantCard";
 
-import { fetchPlants } from "../api/plants";
-
 const Dashboard = (props) => {
   const history = useHistory();
   const [loading, setLoading] = useState(true);
-
+  
   const loadPlants = async () => {
     if (loading && navigator.onLine === true) {
-      const data = await fetchPlants(props.auth.id);
-      props.getPlants(data);
+      props.getPlants(props.auth.id);
       setLoading(false);
     } else if (!navigator.onLine && props.auth === {}) {
       history.push("/");
@@ -27,9 +24,9 @@ const Dashboard = (props) => {
     loadPlants();
   }, [loading]);
 
-  const plantCards = (props.plants) ? props.plants.map((plant) => (
-    <PlantCard key={plant.id} plant={plant} />
-  )) : ""
+  const plantCards = props.plants
+    ? props.plants.map((plant) => <PlantCard key={plant.id} plant={plant} />)
+    : "";
 
   return (
     <div>

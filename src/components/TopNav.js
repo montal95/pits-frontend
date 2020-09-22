@@ -7,7 +7,6 @@ import { currentUser } from "../actions/auth";
 import { connect } from "react-redux";
 
 const TopNav = (props) => {
-  const token = JSON.parse(localStorage.getItem("state"));
   const location = useLocation();
 
   return (
@@ -15,7 +14,7 @@ const TopNav = (props) => {
       <Navbar.Brand href="/">PITS</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-        {!token ? (
+        {props.auth === null ? (
           <LoggedOutButtons pathname={location.pathname} />
         ) : (
           <LoggedInButtons pathname={location.pathname} />
@@ -25,8 +24,14 @@ const TopNav = (props) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
 const mapDispatchToProps = {
   currentUser,
 };
 
-export default connect(null, mapDispatchToProps)(TopNav);
+export default connect(mapStateToProps, mapDispatchToProps)(TopNav);

@@ -1,7 +1,17 @@
-export const getPlants = (plants) => {
-  return {
-    type: "GET_PLANTS",
-    plants: plants,
+export const getPlants = (userId) => {
+  return async function (dispatch) {
+    const reqObj = {
+      method: "GET",
+      headers: {
+        id: `${userId}`,
+      },
+    };
+    const res = await fetch("http://localhost:3000/api/v1/plants", reqObj);
+    const data = await res.json();
+    return dispatch({
+      type: "GET_PLANTS",
+      data: data,
+    });
   };
 };
 

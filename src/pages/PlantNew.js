@@ -1,11 +1,6 @@
 import React, { Component } from "react";
-import { checkToken } from "../helpers/index";
 
 class PlantNew extends Component {
-  componentDidMount() {
-    checkToken(this.props);
-  }
-
   render() {
     return (
       <div>
