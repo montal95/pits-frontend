@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { getPlants } from "../actions/plants";
 import { connect } from "react-redux";
 import { CardGroup } from "react-bootstrap";
-import PlantCards from "../components/PlantCard";
+import PlantCard from "../components/PlantCard";
 
 import { fetchPlants } from "../api/plants";
 
@@ -27,9 +27,9 @@ const Dashboard = (props) => {
     loadPlants();
   }, [loading]);
 
-  const plantCards = props.plants.map((plant) => (
-    <PlantCards key={plant.id} plant={plant} />
-  ));
+  const plantCards = (props.plants) ? props.plants.map((plant) => (
+    <PlantCard key={plant.id} plant={plant} />
+  )) : ""
 
   return (
     <div>

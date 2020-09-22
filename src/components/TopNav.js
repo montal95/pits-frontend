@@ -1,25 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Navbar } from "react-bootstrap";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import LoggedInButtons from "../components/LoggedInButtons";
 import LoggedOutButtons from "../components/LoggedOutButtons";
-import { checkToken } from "../api/auth";
 import { currentUser } from "../actions/auth";
 import { connect } from "react-redux";
 
 const TopNav = (props) => {
   const token = JSON.parse(localStorage.getItem("state"));
   const location = useLocation();
-  const history = useHistory();
-
-  useEffect(() => {
-    if (token) {
-      checkToken(token, history, props.currentUser);
-    }
-  });
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="success" expand="lg" className="mb-4">
       <Navbar.Brand href="/">PITS</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
