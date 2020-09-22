@@ -13,7 +13,7 @@ const PlantShow = (props) => {
   const daysUntilWatering = calcDaysUntil(date, plant.watering_interval);
   const daysUntilColor = daysUntilWatering <= 1 ? "text-danger" : "";
 
-  const waterPlant = async () => {
+  const waterPlantClick = async () => {
     const newDate = new Date().toJSON();
     const updatedPlant = { ...plant, last_watered: newDate };
     props.waterPlant(updatedPlant);
@@ -35,10 +35,12 @@ const PlantShow = (props) => {
         </li>
       </ul>
       <p>
-        <Button variant="primary" className="mr-2" onClick={waterPlant}>
+        <Button variant="primary" className="mr-2" onClick={waterPlantClick}>
           Water now
         </Button>
-        <Button variant="secondary">Edit</Button>
+        <Button variant="secondary" href={`/plants/edit/${id}`}>
+          Edit
+        </Button>
       </p>
     </Jumbotron>
   );
