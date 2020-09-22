@@ -1,11 +1,19 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { calcDaysUntil } from "../helpers/index";
+import { connect } from "react-redux";
+import { waterPlant } from "../actions/plants";
 
-export default function PlantCard({ plant }) {
+const PlantCard = ({ plant, waterPlant }) => {
   const date = new Date(plant.last_watered);
   const daysUntilWatering = calcDaysUntil(date, plant.watering_interval);
   const daysUntilColor = daysUntilWatering <= 1 ? "text-danger" : "";
+
+  const waterPlantClick = async () => {
+    const newDate = new Date().toJSON();
+    const updatedPlant = { ...plant, last_watered: newDate };
+    waterPlant(updatedPlant);
+  };
 
   return (
     <Card bg={"success"}>
@@ -23,7 +31,7 @@ export default function PlantCard({ plant }) {
             </span>
           </li>
         </ul>
-        <Button variant="primary" className="mr-3">
+        <Button variant="primary" className="mr-3" onClick={waterPlantClick}>
           Water Now
         </Button>
         <Button variant="secondary" href={`/plants/${plant.id}`}>
@@ -35,4 +43,8 @@ export default function PlantCard({ plant }) {
       </Card.Footer>
     </Card>
   );
-}
+};
+
+const mapDispatchToProps = { waterPlant };
+
+export default connect(null, mapDispatchToProps)(PlantCard);
