@@ -3,6 +3,7 @@ import { Jumbotron, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { calcDaysUntil } from "../helpers/index";
+import { waterPlant } from "../actions/plants";
 
 const PlantShow = (props) => {
   const location = useLocation();
@@ -12,10 +13,10 @@ const PlantShow = (props) => {
   const daysUntilWatering = calcDaysUntil(date, plant.watering_interval);
   const daysUntilColor = daysUntilWatering <= 1 ? "text-danger" : "";
 
-  const waterPlant = () => {
+  const waterPlant = async () => {
     const newDate = new Date().toJSON();
-    console.log({ newDate });
-    console.log("watering the plant");
+    const updatedPlant = { ...plant, last_watered: newDate };
+    props.waterPlant(updatedPlant);
   };
 
   return (
@@ -49,4 +50,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(PlantShow);
+const mapDispatchToProps = { waterPlant };
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlantShow);

@@ -1,7 +1,12 @@
 export function plantsReducer(state = [], action) {
-  switch (action.type) {
+  const { type, data } = action;
+  switch (type) {
     case "GET_PLANTS":
       return action.plants;
+    case "WATER_PLANT":
+      return state.map((plant) =>
+        plant.id === data.id ? (plant = data) : plant
+      );
     default:
       return state;
   }

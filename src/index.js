@@ -5,17 +5,20 @@ import App from "./App";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers/index";
 
-import { createStore } from "redux";
-
+import { createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
+import logger from "redux-logger";
 import { loadState, saveState } from "./localStorage";
 import throttle from "lodash/throttle";
 
+const middleware = [logger, thunk];
 const persistedState = loadState();
 
 const store = createStore(
   rootReducer,
   persistedState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(applyMiddleware(...middleware))
 );
 
 store.subscribe(
