@@ -3,6 +3,8 @@ import { Card, Button } from "react-bootstrap";
 import { calcDaysUntil } from "../helpers/index";
 import { connect } from "react-redux";
 import { waterPlant } from "../actions/plants";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTint } from "@fortawesome/free-solid-svg-icons";
 
 const PlantCard = ({ plant, waterPlant }) => {
   const date = new Date(plant.last_watered);
@@ -31,8 +33,8 @@ const PlantCard = ({ plant, waterPlant }) => {
             </span>
           </li>
         </ul>
-        <Button variant="primary" className="mr-3" onClick={waterPlantClick}>
-          Water Now
+        <Button variant="primary" className="mr-2" onClick={waterPlantClick}>
+          Water Now <FontAwesomeIcon icon={faTint} />
         </Button>
         <Button variant="secondary" href={`/plants/${plant.id}`}>
           Details

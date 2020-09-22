@@ -4,6 +4,8 @@ import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { calcDaysUntil } from "../helpers/index";
 import { waterPlant } from "../actions/plants";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTint } from "@fortawesome/free-solid-svg-icons";
 
 const PlantShow = (props) => {
   const location = useLocation();
@@ -36,7 +38,7 @@ const PlantShow = (props) => {
       </ul>
       <p>
         <Button variant="primary" className="mr-2" onClick={waterPlantClick}>
-          Water now
+          Water now <FontAwesomeIcon icon={faTint} />
         </Button>
         <Button variant="secondary" href={`/plants/edit/${id}`}>
           Edit
