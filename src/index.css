@@ -1,3 +1,16 @@
+html, body, .App {
+  min-height: 100vh;
+}
+
+#backdrop {
+  background: rgb(34, 193, 195);
+  background: linear-gradient(
+    0deg,
+    rgba(34, 193, 195, 0.9009978991596639) 0%,
+    rgba(40, 167, 69, 1) 100%
+  );
+}
+
 .card-footer {
   background-color: #e2725b;
 }

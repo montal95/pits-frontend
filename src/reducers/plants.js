@@ -4,6 +4,7 @@ export function plantsReducer(state = [], action) {
     case "GET_PLANTS":
       return data;
     case "WATER_PLANT":
+    case "UPDATE_PLANT":
       return state.map((plant) =>
         plant.id === data.id ? (plant = data) : plant
       );

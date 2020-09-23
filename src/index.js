@@ -11,6 +11,7 @@ import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { loadState, saveState } from "./localStorage";
 import throttle from "lodash/throttle";
+import "./index.css";
 
 const middleware = [logger, thunk];
 const persistedState = loadState();
@@ -32,7 +33,7 @@ store.subscribe(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App  className="vh-100"/>
   </Provider>,
   document.getElementById("root")
 );

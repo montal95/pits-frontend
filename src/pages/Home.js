@@ -1,9 +1,11 @@
 import React from "react";
-import { Jumbotron, Button, ButtonGroup } from "react-bootstrap";
+import { Jumbotron } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeaf } from "@fortawesome/free-solid-svg-icons";
+import { connect } from "react-redux";
+import HomeButtons from "../components/HomeButtons";
 
-export default function Home() {
+const Home = (props) => {
   return (
     <Jumbotron className="justify-content-center">
       <div className="mx-auto" style={{ width: "300px" }}>
@@ -17,28 +19,15 @@ export default function Home() {
         of your plant's needs. Download the app to your device to keep an eye on
         when to water your plant next!{" "}
       </p>
-      <div className="mx-auto" style={{ minWidth: "310px", maxWidth: "850px" }}>
-        <ButtonGroup
-          className="mx-auto"
-          style={{
-            backgroundColor: "#e2725b",
-            padding: "12px",
-            borderRadius: "5px",
-          }}
-        >
-          <Button
-            variant="success"
-            size="lg"
-            style={{ marginRight: "10px" }}
-            href="/plants/new"
-          >
-            New Plant
-          </Button>{" "}
-          <Button variant="success" size="lg" href="/plants">
-            All Plants
-          </Button>
-        </ButtonGroup>
-      </div>
+      {props.auth === null ? "" : <HomeButtons />}
     </Jumbotron>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStateToProps, null)(Home);

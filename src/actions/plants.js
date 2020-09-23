@@ -19,7 +19,6 @@ export const getPlants = (userId) => {
 
 export const waterPlant = (plant) => {
   return async function (dispatch) {
-    console.log("waterPlant action");
     const url = `${URL}/${plant.id}`;
     const reqObj = {
       method: "PATCH",
@@ -30,7 +29,6 @@ export const waterPlant = (plant) => {
     };
     const res = await fetch(url, reqObj);
     const updatedPlant = await res.json();
-    console.log(updatedPlant);
     if (res.status === 200) {
       return dispatch({
         type: "WATER_PLANT",
@@ -74,6 +72,27 @@ export const deletePlant = (id, history) => {
       return dispatch({
         type: "DELETE_PLANT",
         data: id,
+      });
+    }
+  };
+};
+
+export const updatePlantAction = (plant, id) => {
+  return async function (dispatch) {
+    const reqObj = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(plant),
+    };
+    const url = `${URL}/${id}`;
+    const res = await fetch(url, reqObj);
+    const updatedPlant = await res.json();
+    if (res.status === 200) {
+      return dispatch({
+        type: "UPDATE_PLANT",
+        data: updatedPlant,
       });
     }
   };

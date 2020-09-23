@@ -12,7 +12,7 @@ const TopNav = (props) => {
   const location = useLocation();
 
   return (
-    <Navbar bg="success" expand="lg" className="mb-4">
+    <Navbar bg="success" expand="lg" >
       <Navbar.Brand href="/"><FontAwesomeIcon icon={faLeaf} />{" "}PITS</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
