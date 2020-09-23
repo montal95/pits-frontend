@@ -1,14 +1,19 @@
-html, body, .App {
+html,
+body {
   min-height: 100vh;
-}
-
-#backdrop {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   background: rgb(34, 193, 195);
   background: linear-gradient(
     0deg,
     rgba(34, 193, 195, 0.9009978991596639) 0%,
     rgba(40, 167, 69, 1) 100%
   );
+}
+
+.jumbotron {
+  background-color: rgba(234, 237, 240, 0.8);
 }
 
 .card-footer {

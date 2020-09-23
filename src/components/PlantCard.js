@@ -19,7 +19,7 @@ const PlantCard = ({ plant, waterPlant }) => {
 
   return (
     <Col md={"4"}>
-      <Card bg={"success"} style={{ flex: 1 }}>
+      <Card border="light" bg={"success"} style={{ flex: 1 }}>
         <Card.Body>
           <Card.Title>{plant.nickname}</Card.Title>
 

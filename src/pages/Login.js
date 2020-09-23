@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Button, Alert, Jumbotron } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { userAuth } from "../api/auth";
 import { loginSuccess } from "../actions/auth";
@@ -23,7 +23,8 @@ const Login = (props) => {
   };
 
   return (
-    <div>
+    <Jumbotron>
+      <h1 className="mb-3">Log In</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -58,7 +59,7 @@ const Login = (props) => {
           Submit
         </Button>
       </Form>
-    </div>
+    </Jumbotron>
   );
 };
 
