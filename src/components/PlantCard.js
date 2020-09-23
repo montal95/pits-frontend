@@ -18,7 +18,7 @@ const PlantCard = ({ plant, waterPlant }) => {
   };
 
   return (
-    <Card bg={"success"}>
+    <Card bg={"success"} style={{ flex: 1 }} className="box">
       <Card.Body>
         <Card.Title>{plant.nickname}</Card.Title>
 

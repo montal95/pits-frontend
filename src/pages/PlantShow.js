@@ -3,14 +3,16 @@ import { Jumbotron, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { calcDaysUntil } from "../helpers/index";
-import { waterPlant } from "../actions/plants";
+import { waterPlant, deletePlant } from "../actions/plants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTint } from "@fortawesome/free-solid-svg-icons";
+import { faTint, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router-dom";
 
 const PlantShow = (props) => {
   const location = useLocation();
   const id = parseInt(location.pathname.split("/")[2]);
   const plant = props.plants.find((plant) => plant.id === id);
+  const history = useHistory();
   const date = new Date(plant.last_watered);
   const daysUntilWatering = calcDaysUntil(date, plant.watering_interval);
   const daysUntilColor = daysUntilWatering <= 1 ? "text-danger" : "";
@@ -19,6 +21,10 @@ const PlantShow = (props) => {
     const newDate = new Date().toJSON();
     const updatedPlant = { ...plant, last_watered: newDate };
     props.waterPlant(updatedPlant);
+  };
+
+  const deletePlantClick = () => {
+    props.deletePlant(id, history);
   };
 
   return (
@@ -40,8 +46,15 @@ const PlantShow = (props) => {
         <Button variant="primary" className="mr-2" onClick={waterPlantClick}>
           Water now <FontAwesomeIcon icon={faTint} />
         </Button>
-        <Button variant="secondary" href={`/plants/edit/${id}`}>
+        <Button
+          variant="secondary"
+          className="mr-2"
+          href={`/plants/edit/${id}`}
+        >
           Edit
+        </Button>
+        <Button variant="danger" onClick={deletePlantClick}>
+          Delete <FontAwesomeIcon icon={faTrash} />
         </Button>
       </p>
     </Jumbotron>
@@ -54,6 +67,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { waterPlant };
+const mapDispatchToProps = { waterPlant, deletePlant };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlantShow);

@@ -1,3 +1,5 @@
+const URL = "http://localhost:3000/api/v1/plants";
+
 export const getPlants = (userId) => {
   return async function (dispatch) {
     const reqObj = {
@@ -6,7 +8,7 @@ export const getPlants = (userId) => {
         id: `${userId}`,
       },
     };
-    const res = await fetch("http://localhost:3000/api/v1/plants", reqObj);
+    const res = await fetch(URL, reqObj);
     const data = await res.json();
     return dispatch({
       type: "GET_PLANTS",
@@ -18,7 +20,7 @@ export const getPlants = (userId) => {
 export const waterPlant = (plant) => {
   return async function (dispatch) {
     console.log("waterPlant action");
-    const url = `http://localhost:3000/api/v1/plants/${plant.id}`;
+    const url = `${URL}/${plant.id}`;
     const reqObj = {
       method: "PATCH",
       headers: {
@@ -38,6 +40,40 @@ export const waterPlant = (plant) => {
       return dispatch({
         type: "WATER_PLANT",
         data: plant,
+      });
+    }
+  };
+};
+
+export const addNewPlant = (plant, userId) => {
+  return async function (dispatch) {
+    const reqObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        id: userId,
+      },
+      body: JSON.stringify(plant),
+    };
+    const res = await fetch(URL, reqObj);
+    const newPlant = await res.json();
+    if (res.status === 200) {
+      return dispatch({
+        type: "NEW_PLANT",
+        data: newPlant,
+      });
+    }
+  };
+};
+
+export const deletePlant = (id, history) => {
+  return async function (dispatch) {
+    const res = await fetch(`${URL}/${id}`, { method: "DELETE" });
+    if (res.status === 200) {
+      history.push("/dashboard");
+      return dispatch({
+        type: "DELETE_PLANT",
+        data: id,
       });
     }
   };

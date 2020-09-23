@@ -7,7 +7,10 @@ export function plantsReducer(state = [], action) {
       return state.map((plant) =>
         plant.id === data.id ? (plant = data) : plant
       );
-
+    case "NEW_PLANT":
+      return [...state, data];
+    case "DELETE_PLANT":
+      return state.map((plant) => (plant.id !== data ? true : false));
     default:
       return state;
   }
