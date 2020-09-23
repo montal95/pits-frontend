@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { getPlants } from "../actions/plants";
 import { connect } from "react-redux";
-import { CardDeck } from "react-bootstrap";
+import { CardDeck, Row } from "react-bootstrap";
 import PlantCard from "../components/PlantCard";
 
 class Dashboard extends Component {
@@ -28,7 +28,9 @@ class Dashboard extends Component {
     return (
       <div>
         <h1>Dashboard</h1>
-        <CardDeck className="grid">{plantCards}</CardDeck>
+        <CardDeck>
+          <Row>{plantCards}</Row>
+        </CardDeck>
       </div>
     );
   }
