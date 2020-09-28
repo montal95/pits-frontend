@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button, Jumbotron } from "react-bootstrap";
 import { connect } from "react-redux";
 import { updatePlantAction } from "../actions/plants";
@@ -6,15 +6,27 @@ import { useHistory, useLocation } from "react-router-dom";
 
 const PlantEdit = (props) => {
   const location = useLocation();
+  const history = useHistory();
   const id = parseInt(location.pathname.split("/")[3]);
   const plant = props.plants.find((plant) => plant.id === id);
-  const [nickname, setNickname] = useState(plant.nickname);
-  const [plantSpecies, setPlantSpecies] = useState(plant.plant_species);
-  const [wateringInterval, setWateringInterval] = useState(
-    plant.watering_interval
-  );
+  const [nickname, setNickname] = useState("");
+  const [plantSpecies, setPlantSpecies] = useState("");
+  const [wateringInterval, setWateringInterval] = useState("");
   const [lastWatered, setLastWatered] = useState("");
-  const history = useHistory();
+
+  const setInitialFormState = () => {
+    setNickname(plant.nickname);
+    setPlantSpecies(plant.plant_species);
+    setWateringInterval(plant.watering_interval);
+  };
+
+  useEffect(() => {
+    if (props.auth === null) {
+      history.push("/");
+    } else {
+      setInitialFormState();
+    }
+  });
 
   const updatedPlant = {
     nickname: nickname,

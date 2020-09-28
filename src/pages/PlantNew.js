@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button, Jumbotron } from "react-bootstrap";
 import { connect } from "react-redux";
 import { addNewPlant } from "../actions/plants";
@@ -22,6 +22,12 @@ const PlantNew = (props) => {
     e.preventDefault();
     props.addNewPlant(newPlant, props.auth.id, history);
   };
+
+  useEffect(() => {
+    if (props.auth === null) {
+      history.push("/");
+    }
+  });
 
   return (
     <Jumbotron id="new-plant-div">

@@ -6,7 +6,7 @@ import PlantCard from "../components/PlantCard";
 
 class Dashboard extends Component {
   loadPlants = async () => {
-    if (navigator.onLine === true) {
+    if (navigator.onLine === true && this.props.auth !== null) {
       this.props.getPlants(this.props.auth.id);
     } else if (!navigator.onLine && this.props.auth === null) {
       this.props.history.push("/");

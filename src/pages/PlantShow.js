@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Jumbotron, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
@@ -11,10 +11,14 @@ import { useHistory } from "react-router-dom";
 const PlantShow = (props) => {
   const location = useLocation();
   const id = parseInt(location.pathname.split("/")[2]);
-  const plant = props.plants.find((plant) => plant.id === id);
+  const plant = props.auth
+    ? props.plants.find((plant) => plant.id === id)
+    : { nickname: "", watering_interval: 1 };
   const history = useHistory();
-  const date = new Date(plant.last_watered);
-  const daysUntilWatering = calcDaysUntil(date, plant.watering_interval);
+  const date = props.auth ? new Date(plant.last_watered) : new Date();
+  const daysUntilWatering = props.auth
+    ? calcDaysUntil(date, plant.watering_interval)
+    : 1;
   const daysUntilColor = daysUntilWatering <= 1 ? "text-danger" : "";
 
   const waterPlantClick = async () => {
@@ -26,6 +30,12 @@ const PlantShow = (props) => {
   const deletePlantClick = () => {
     props.deletePlant(id, history);
   };
+
+  useEffect(() => {
+    if (props.auth === null) {
+      history.push("/");
+    }
+  });
 
   return (
     <Jumbotron>
@@ -63,6 +73,7 @@ const PlantShow = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    auth: state.auth,
     plants: state.plants,
   };
 };
