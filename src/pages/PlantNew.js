@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Jumbotron } from "react-bootstrap";
 import { connect } from "react-redux";
 import { addNewPlant } from "../actions/plants";
 import { useHistory } from "react-router-dom";
@@ -18,18 +18,19 @@ const PlantNew = (props) => {
     last_watered: new Date(lastWatered).toJSON(),
   };
 
-  const clickHandler = () => {
-    props.addNewPlant(newPlant, props.auth.id);
-    history.push(`/plants/${props.plants[props.plants.length - 1].id}`);
+  const clickHandler = (e) => {
+    e.preventDefault();
+    props.addNewPlant(newPlant, props.auth.id, history);
   };
 
   return (
-    <div id="new-plant-div">
+    <Jumbotron id="new-plant-div">
       <h1>New Plant</h1>
-      <Form>
+      <Form onSubmit={clickHandler}>
         <Form.Group>
           <Form.Label>Nickname</Form.Label>
           <Form.Control
+            Required
             type="text"
             placeholder="Nickname"
             value={nickname}
@@ -39,6 +40,7 @@ const PlantNew = (props) => {
         <Form.Group>
           <Form.Label>Species</Form.Label>
           <Form.Control
+            required
             type="text"
             placeholder="Species"
             value={plantSpecies}
@@ -48,6 +50,7 @@ const PlantNew = (props) => {
         <Form.Group>
           <Form.Label>Watering Interval</Form.Label>
           <Form.Control
+            required
             type="number"
             placeholder="How Many Days Between Watering"
             value={wateringInterval}
@@ -59,16 +62,17 @@ const PlantNew = (props) => {
         <Form.Group>
           <Form.Label>Date Last Watered</Form.Label>
           <Form.Control
+            required
             type="datetime-local"
             value={lastWatered}
             onChange={(e) => setLastWatered(e.target.value)}
           />
         </Form.Group>
-        <Button variant="primary" onClick={clickHandler}>
+        <Button variant="primary" type="submit">
           Submit
         </Button>
       </Form>
-    </div>
+    </Jumbotron>
   );
 };
 

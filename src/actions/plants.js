@@ -43,7 +43,7 @@ export const waterPlant = (plant) => {
   };
 };
 
-export const addNewPlant = (plant, userId) => {
+export const addNewPlant = (plant, userId, history) => {
   return async function (dispatch) {
     const reqObj = {
       method: "POST",
@@ -56,6 +56,7 @@ export const addNewPlant = (plant, userId) => {
     const res = await fetch(URL, reqObj);
     const newPlant = await res.json();
     if (res.status === 200) {
+      history.push(`/dashboard`);
       return dispatch({
         type: "NEW_PLANT",
         data: newPlant,
