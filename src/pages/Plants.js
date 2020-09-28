@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import { checkToken } from "../helpers/index";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
-class Plants extends Component {
-  componentDidMount() {
-    checkToken(this.props);
-  }
+const Plants = () => {
+  const history = useHistory();
 
-  render() {
-    return (
-      <div>
-        <h1>Plants Page</h1>
-      </div>
-    );
-  }
-}
+  useEffect(() => {
+    history.push("/dashboard");
+  });
+
+  return (
+    <div>
+      <h1>Plants Page</h1>
+    </div>
+  );
+};
 
 export default Plants;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { getPlants } from "../actions/plants";
 import { connect } from "react-redux";
-import { CardDeck, Row } from "react-bootstrap";
+import { CardDeck, Row, Alert, Jumbotron } from "react-bootstrap";
 import PlantCard from "../components/PlantCard";
 
 class Dashboard extends Component {
@@ -19,19 +19,25 @@ class Dashboard extends Component {
   }
 
   render() {
-    const plantCards = this.props.plants
-      ? this.props.plants.map((plant) => (
+    console.log(this.props.plants.length);
+    const plantCards =
+      this.props.plants.length !== 0 ? (
+        this.props.plants.map((plant) => (
           <PlantCard key={plant.id} plant={plant} />
         ))
-      : "";
+      ) : (
+        <Alert variant={"info"} style={{ width: "100%" }}>
+          Please click new plant to start tracking!
+        </Alert>
+      );
 
     return (
-      <div>
+      <Jumbotron className="mt-3">
         <h1>Dashboard</h1>
         <CardDeck>
           <Row>{plantCards}</Row>
         </CardDeck>
-      </div>
+      </Jumbotron>
     );
   }
 }

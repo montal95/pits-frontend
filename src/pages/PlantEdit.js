@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Jumbotron } from "react-bootstrap";
 import { connect } from "react-redux";
 import { updatePlantAction } from "../actions/plants";
 import { useHistory, useLocation } from "react-router-dom";
@@ -23,15 +23,16 @@ const PlantEdit = (props) => {
     last_watered: new Date(lastWatered).toJSON(),
   };
 
-  const clickHandler = async () => {
+  const clickHandler = async (e) => {
+    e.preventDefault();
     await props.updatePlantAction(updatedPlant, id);
     history.push(`/plants/${id}`);
   };
 
   return (
-    <div id="edit-plant-div">
+    <Jumbotron id="edit-plant-div" className="mt-3">
       <h1>Edit Plant</h1>
-      <Form>
+      <Form onSubmit={clickHandler}>
         <Form.Group>
           <Form.Label>Nickname</Form.Label>
           <Form.Control
@@ -73,11 +74,11 @@ const PlantEdit = (props) => {
             onChange={(e) => setLastWatered(e.target.value)}
           />
         </Form.Group>
-        <Button variant="primary" onClick={clickHandler}>
+        <Button variant="primary" type="submit">
           Submit
         </Button>
       </Form>
-    </div>
+    </Jumbotron>
   );
 };
 

@@ -28,7 +28,7 @@ const Signup = (props) => {
 
   return (
     <Jumbotron>
-        <h1 className="mb-3">Sign Up</h1>
+      <h1 className="mb-3">Sign Up</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -50,6 +50,7 @@ const Signup = (props) => {
         <Form.Group>
           <Form.Label>First Name</Form.Label>
           <Form.Control
+            required
             type="text"
             placeholder="John"
             name="first name"
@@ -63,6 +64,7 @@ const Signup = (props) => {
         <Form.Group>
           <Form.Label>Last Name</Form.Label>
           <Form.Control
+            required
             type="text"
             placeholder="Doe"
             name="last name"
