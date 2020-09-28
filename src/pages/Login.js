@@ -29,6 +29,7 @@ const Login = (props) => {
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
+            required
             type="email"
             placeholder="Enter email"
             name="email"
