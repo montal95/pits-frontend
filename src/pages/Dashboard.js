@@ -3,6 +3,7 @@ import { getPlants } from "../actions/plants";
 import { connect } from "react-redux";
 import { CardDeck, Row, Alert, Jumbotron } from "react-bootstrap";
 import PlantCard from "../components/PlantCard";
+import { calcDaysUntil } from "../helpers/index";
 
 class Dashboard extends Component {
   loadPlants = async () => {
@@ -18,11 +19,24 @@ class Dashboard extends Component {
     this.loadPlants();
   }
 
+  plantSort = () => {
+    const plants = this.props.plants;
+    const modPlants = plants.map((plant) => {
+      const date = new Date(plant.last_watered);
+      plant.daysUntilWatering = calcDaysUntil(date, plant.watering_interval);
+      return plant;
+    });
+    const sortedPlants = modPlants.sort(
+      (a, b) => a.daysUntilWatering - b.daysUntilWatering
+    );
+    return sortedPlants;
+  };
+
   render() {
-    console.log(this.props.plants.length);
+    const sortedPlants = this.props.plants.length !== 0 ? this.plantSort() : [];
     const plantCards =
       this.props.plants.length !== 0 ? (
-        this.props.plants.map((plant) => (
+        sortedPlants.map((plant) => (
           <PlantCard key={plant.id} plant={plant} />
         ))
       ) : (
@@ -32,7 +46,7 @@ class Dashboard extends Component {
       );
 
     return (
-      <Jumbotron className="mt-3">
+      <Jumbotron>
         <h1>Dashboard</h1>
         <CardDeck>
           <Row>{plantCards}</Row>

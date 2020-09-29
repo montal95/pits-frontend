@@ -1,4 +1,8 @@
-const URL = "http://localhost:3000/api/v1/plants";
+const URL = `${
+  process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_API_URL
+    : "http://localhost:3000/api/v1/"
+}plants`;
 
 export const getPlants = (userId) => {
   return async function (dispatch) {

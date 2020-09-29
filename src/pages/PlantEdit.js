@@ -13,20 +13,22 @@ const PlantEdit = (props) => {
   const [plantSpecies, setPlantSpecies] = useState("");
   const [wateringInterval, setWateringInterval] = useState("");
   const [lastWatered, setLastWatered] = useState("");
+  const [stateLoaded, setStateLoaded] = useState(false);
 
   const setInitialFormState = () => {
     setNickname(plant.nickname);
     setPlantSpecies(plant.plant_species);
     setWateringInterval(plant.watering_interval);
+    setStateLoaded(true);
   };
 
   useEffect(() => {
     if (props.auth === null) {
       history.push("/");
-    } else {
+    } else if (!stateLoaded) {
       setInitialFormState();
     }
-  });
+  }, [stateLoaded]);
 
   const updatedPlant = {
     nickname: nickname,
@@ -42,7 +44,7 @@ const PlantEdit = (props) => {
   };
 
   return (
-    <Jumbotron id="edit-plant-div" className="mt-3">
+    <Jumbotron id="edit-plant-div">
       <h1>Edit Plant</h1>
       <Form onSubmit={clickHandler}>
         <Form.Group>

@@ -5,15 +5,21 @@ import LoggedInButtons from "../components/LoggedInButtons";
 import LoggedOutButtons from "../components/LoggedOutButtons";
 import { currentUser } from "../actions/auth";
 import { connect } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLeaf } from "@fortawesome/free-solid-svg-icons";
+import logo from "../logo.png";
 
 const TopNav = (props) => {
   const location = useLocation();
 
   return (
-    <Navbar bg="success" expand="lg" >
-      <Navbar.Brand href="/"><FontAwesomeIcon icon={faLeaf} />{" "}PITS</Navbar.Brand>
+    <Navbar bg="success" expand="lg" className={"mb-3"}>
+      <Navbar.Brand href="/">
+        <img
+          src={logo}
+          alt="PITS logo"
+          style={{ height: "0.8em", width: "0.8em", marginBottom: "5px" }}
+        />{" "}
+        PITS
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
         {props.auth === null ? (
