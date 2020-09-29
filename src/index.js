@@ -12,8 +12,11 @@ import logger from "redux-logger";
 import { loadState, saveState } from "./localStorage";
 import throttle from "lodash/throttle";
 import "./index.css";
+import dotenv from "dotenv";
+dotenv.config();
 
-const middleware = [logger, thunk];
+const middleware =
+  process.env.NODE_ENV === "production" ? [thunk] : [logger, thunk];
 const persistedState = loadState();
 
 const store = createStore(
@@ -33,7 +36,7 @@ store.subscribe(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App  className="vh-100"/>
+    <App className="vh-100" />
   </Provider>,
   document.getElementById("root")
 );

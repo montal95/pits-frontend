@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Button, Col } from "react-bootstrap";
-import { calcDaysUntil } from "../helpers/index";
 import { connect } from "react-redux";
 import { waterPlant } from "../actions/plants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,8 +7,7 @@ import { faTint } from "@fortawesome/free-solid-svg-icons";
 
 const PlantCard = ({ plant, waterPlant }) => {
   const date = new Date(plant.last_watered);
-  const daysUntilWatering = calcDaysUntil(date, plant.watering_interval);
-  const daysUntilColor = daysUntilWatering <= 1 ? "text-danger" : "";
+  const daysUntilColor = plant.daysUntilWatering <= 1 ? "text-danger" : "";
 
   const waterPlantClick = async () => {
     const newDate = new Date().toJSON();
@@ -28,9 +26,9 @@ const PlantCard = ({ plant, waterPlant }) => {
             <li>Watered every {plant.watering_interval} days</li>
             <li>
               <span className={daysUntilColor}>
-                {daysUntilWatering >= 0
-                  ? `Water in ${daysUntilWatering} days`
-                  : `Late by ${-daysUntilWatering} days`}
+                {plant.daysUntilWatering >= 0
+                  ? `Water in ${plant.daysUntilWatering} days`
+                  : `Late by ${-plant.daysUntilWatering} days`}
               </span>
             </li>
           </ul>

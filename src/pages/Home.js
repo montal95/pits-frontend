@@ -1,9 +1,8 @@
 import React from "react";
 import { Jumbotron } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLeaf } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
 import HomeButtons from "../components/HomeButtons";
+import logo from "../logo.png";
 
 const Home = (props) => {
   return (
@@ -11,7 +10,12 @@ const Home = (props) => {
       <div className="mx-auto" style={{ width: "300px" }}>
         <h2>Welome to</h2>
         <h1>
-          <FontAwesomeIcon icon={faLeaf} /> PITS
+          <img
+            src={logo}
+            alt="PITS logo"
+            style={{ height: "0.8em", width: "0.8em", marginBottom: "5px" }}
+          />
+          {" "}PITS
         </h1>
       </div>
       <p className="mx-auto" style={{ minWidth: "310px", maxWidth: "850px" }}>

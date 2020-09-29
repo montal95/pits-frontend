@@ -1,4 +1,8 @@
-const URL = "http://localhost:3000/api/v1/auth";
+const URL = `${
+  process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_API_URL
+    : "http://localhost:3000/api/v1/"
+}auth`;
 
 export const loginSuccess = (user) => {
   return {
