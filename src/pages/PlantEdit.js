@@ -9,26 +9,18 @@ const PlantEdit = (props) => {
   const history = useHistory();
   const id = parseInt(location.pathname.split("/")[3]);
   const plant = props.plants.find((plant) => plant.id === id);
-  const [nickname, setNickname] = useState("");
-  const [plantSpecies, setPlantSpecies] = useState("");
-  const [wateringInterval, setWateringInterval] = useState("");
+  const [nickname, setNickname] = useState(plant.nickname || "");
+  const [plantSpecies, setPlantSpecies] = useState(plant.plant_species || "");
+  const [wateringInterval, setWateringInterval] = useState(
+    plant.watering_interval || ""
+  );
   const [lastWatered, setLastWatered] = useState("");
-  const [stateLoaded, setStateLoaded] = useState(false);
-
-  const setInitialFormState = () => {
-    setNickname(plant.nickname);
-    setPlantSpecies(plant.plant_species);
-    setWateringInterval(plant.watering_interval);
-    setStateLoaded(true);
-  };
 
   useEffect(() => {
     if (props.auth === null) {
       history.push("/");
-    } else if (!stateLoaded) {
-      setInitialFormState();
     }
-  }, [stateLoaded]);
+  });
 
   const updatedPlant = {
     nickname: nickname,

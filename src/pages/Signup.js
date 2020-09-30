@@ -22,7 +22,7 @@ const Signup = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) return;
+    if (password !== confirmPassword) return setError("Passwords do not match");
     props.signupSuccessAction(newUser, history);
   };
 
