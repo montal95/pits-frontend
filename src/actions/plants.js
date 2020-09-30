@@ -69,11 +69,10 @@ export const addNewPlant = (plant, userId, history) => {
   };
 };
 
-export const deletePlant = (id, history) => {
+export const deletePlant = (id) => {
   return async function (dispatch) {
     const res = await fetch(`${URL}/${id}`, { method: "DELETE" });
     if (res.status === 200) {
-      history.push("/dashboard");
       return dispatch({
         type: "DELETE_PLANT",
         data: id,

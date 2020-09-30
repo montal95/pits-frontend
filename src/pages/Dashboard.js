@@ -22,6 +22,7 @@ class Dashboard extends Component {
   plantSort = () => {
     const plants = this.props.plants;
     const modPlants = plants.map((plant) => {
+      if (!plant.watering_interval) return false;
       const date = new Date(plant.last_watered);
       plant.daysUntilWatering = calcDaysUntil(date, plant.watering_interval);
       return plant;
@@ -36,9 +37,7 @@ class Dashboard extends Component {
     const sortedPlants = this.props.plants.length !== 0 ? this.plantSort() : [];
     const plantCards =
       this.props.plants.length !== 0 ? (
-        sortedPlants.map((plant) => (
-          <PlantCard key={plant.id} plant={plant} />
-        ))
+        sortedPlants.map((plant) => <PlantCard key={plant.id} plant={plant} />)
       ) : (
         <Alert variant={"info"} style={{ width: "100%" }}>
           Please click new plant to start tracking!

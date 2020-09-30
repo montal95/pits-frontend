@@ -36,7 +36,7 @@ const PlantNew = (props) => {
         <Form.Group>
           <Form.Label>Nickname</Form.Label>
           <Form.Control
-            Required
+            required
             type="text"
             placeholder="Nickname"
             value={nickname}
