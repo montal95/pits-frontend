@@ -14,6 +14,7 @@ import PlantEdit from "./pages/PlantEdit";
 import PlantNew from "./pages/PlantNew";
 import About from "./pages/About";
 import Support from "./pages/Support";
+import BottomNav from "./components/BottomNav";
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
             <Route exact path="/about" component={About} />
             <Route exact path="/support" component={Support} />
           </Switch>
+          <BottomNav />
         </Container>
       </div>
     </BrowserRouter>
