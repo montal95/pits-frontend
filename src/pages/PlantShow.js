@@ -28,7 +28,8 @@ const PlantShow = (props) => {
   };
 
   const deletePlantClick = () => {
-    props.deletePlant(id, history);
+    props.deletePlant(id);
+    history.push("/dashboard");
   };
 
   useEffect(() => {

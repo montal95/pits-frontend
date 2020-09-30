@@ -3,7 +3,10 @@ import { Button, ButtonGroup } from "react-bootstrap";
 
 export default function HomeButtons() {
   return (
-    <div className="mx-auto" style={{ minWidth: "310px", maxWidth: "850px" }}>
+    <div
+      className="mx-auto"
+      style={{ minWidth: "310px", maxWidth: "850px", width: "fit-content" }}
+    >
       <ButtonGroup
         className="mx-auto"
         style={{
